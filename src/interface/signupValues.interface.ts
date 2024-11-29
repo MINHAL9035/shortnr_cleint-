@@ -4,3 +4,7 @@ export interface SignUpFormValues {
   password: string;
   confirmPassword: string;
 }
+export interface LoginFormValues {
+  email: string;
+  password: string;
+}

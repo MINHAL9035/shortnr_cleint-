@@ -1,15 +1,28 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { X } from "lucide-react";
 import { RootState } from "../redux/store/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import handleError from "../helpers/errorHandler";
+import { removeUserInfo } from "../redux/slice/userSlice";
+import { logOut } from "../service/api/auth";
 
 const NavBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSignOut = () => {
-    console.log("Signing out");
+  const handleSignOut = async () => {
+    try {
+      const response = await logOut();
+      if (response.status === 201) {
+        dispatch(removeUserInfo());
+        navigate("/login");
+      }
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   return (
