@@ -32,3 +32,17 @@ export const LoginValidationSchema = Yup.object({
     )
     .required("Password is required"),
 });
+
+
+export const createLinkSchema = Yup.object({
+  title: Yup.string()
+    .required("Title is required")
+    .min(3, "Title must be at least 3 characters"),
+  longUrl: Yup.string()
+    .required("Long URL is required")
+    .url("Must be a valid URL"),
+  customUrl: Yup.string().matches(
+    /^[a-zA-Z0-9_-]*$/,
+    "Custom link can only contain letters, numbers, underscores, or dashes"
+  ),
+});

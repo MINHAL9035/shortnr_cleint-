@@ -18,7 +18,7 @@ const NavBar = () => {
       const response = await logOut();
       if (response.status === 201) {
         dispatch(removeUserInfo());
-        navigate("/login");
+        navigate("/");
       }
     } catch (error) {
       handleError(error);
@@ -59,12 +59,19 @@ const NavBar = () => {
                   >
                     <X size={20} />
                   </button>
-                  <div className="px-4 py-4  hover:bg-gray-900">
+                  <div className="px-4 py-4  hover:bg-gray-700">
                     <span className="block text-sm px-4 py-2 text-white">
                       {userInfo.userName}
                     </span>
                   </div>
-                  <div className="px-4 py-3 border-t  hover:bg-gray-900">
+                  <Link to="/dashboard">
+                    <div className="px-4 py-4 border-t  hover:bg-gray-700">
+                      <span className="block text-sm px-4 py-2 text-white">
+                        My Links
+                      </span>
+                    </div>
+                  </Link>
+                  <div className="px-4 py-3 border-t  hover:bg-gray-700">
                     <button
                       onClick={handleSignOut}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-200 "

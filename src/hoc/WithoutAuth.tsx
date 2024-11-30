@@ -10,7 +10,7 @@ interface WithoutAuthProps {
 const WithoutAuth: React.FC<WithoutAuthProps> = ({ component: Component }) => {
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
 
-  return userInfo ? <Navigate to="/" /> : <Component />;
+  return userInfo ? <Navigate to="/dashboard" /> : <Component />;
 };
 
 export default WithoutAuth;

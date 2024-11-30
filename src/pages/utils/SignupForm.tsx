@@ -27,16 +27,13 @@ const SignupForm = () => {
 
     try {
       const response = await Signup(values);
-      console.log(response);
+      console.log("signUpResponse", response.data.data);
 
       if (response.status === 201) {
         message.success("signUp Successfully");
-        dispatch(setUserInfo(response.data));
-        navigate("/");
-      } else {
-        message.error(
-          response.error || "Something went wrong, please try again"
-        );
+        const userResponse = response.data;
+        dispatch(setUserInfo(userResponse.data));
+        navigate("/dashboard");
       }
     } catch (error) {
       handleError(error);

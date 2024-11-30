@@ -22,17 +22,14 @@ const LoginFormDetails = () => {
 
   const handleSubmit = async (values: LoginFormValues) => {
     console.log(values);
-    
+
     try {
       const response = await Login(values);
-      if (response.success && response.status === 201) {
+      if (response.status === 201) {
         message.success("Logged in Successfully");
-        dispatch(setUserInfo(response.data));
-        navigate("/");
-      } else {
-        message.error(
-          response.error || "Something went wrong, please try again"
-        );
+        const userResponse = response.data;
+        dispatch(setUserInfo(userResponse.data));
+        navigate("/dashboard");
       }
     } catch (error) {
       handleError(error);
@@ -82,7 +79,7 @@ const LoginFormDetails = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-0 top-1/2 -translate-y-1/2 p-2 focus:outline-none"
+                className="absolute right-0 top-1/3 -translate-y-1/3  focus:outline-none"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? (

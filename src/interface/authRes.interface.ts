@@ -1,8 +1,9 @@
+import { LinkInterface } from "./link.interface";
 import { IUserInterface } from "./user.interface";
 
 export interface AuthResponse {
   success: boolean;
-  data?: IUserInterface;
+  data?: IUserInterface | LinkInterface[];
   error?: string;
   status?: number;
 }
