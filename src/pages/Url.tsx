@@ -4,12 +4,16 @@ import { useNavigate } from "react-router-dom";
 const Url = () => {
   const [link, setLink] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = () => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     navigate("/login");
   };
   return (
     <>
-      <form className="bg-white rounded-lg shadow-lg p-10 text-left">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white rounded-lg shadow-lg p-10 text-left"
+      >
         <h3 className="text-2xl font-bold mb-4">Shorten a long link</h3>
         <div className="mb-6">
           <label
@@ -32,7 +36,6 @@ const Url = () => {
         </div>
         <button
           type="submit"
-          onSubmit={handleSubmit}
           className={` hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md ${
             !link ? "bg-gray-500 cursor-not-allowed" : "bg-gray-900"
           }`}
