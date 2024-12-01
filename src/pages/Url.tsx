@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Url = () => {
   const [link, setLink] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    navigate("/login");
+  };
   return (
     <>
       <form className="bg-white rounded-lg shadow-lg p-10 text-left">
@@ -27,6 +32,7 @@ const Url = () => {
         </div>
         <button
           type="submit"
+          onSubmit={handleSubmit}
           className={` hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md ${
             !link ? "bg-gray-500 cursor-not-allowed" : "bg-gray-900"
           }`}
